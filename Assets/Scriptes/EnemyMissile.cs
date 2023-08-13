@@ -26,4 +26,11 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collide");
+        Destroy(gameObject);
+    }
+
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerShipMovement : MonoBehaviour
@@ -20,15 +19,18 @@ public class PlayerShipMovement : MonoBehaviour
 
     private int currentHealth, maxHealth = 100;
 
+    
 
     private void Awake()
     {
         currentHealth = maxHealth;
+        
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        HealthBar.SetHealth(currentHealth);
     }
 
     // Update is called once per frame
@@ -39,9 +41,15 @@ public class PlayerShipMovement : MonoBehaviour
         ShipFire();
     }
 
+    public float MoveForce
+    {
+        get { return moveForce; }
+        set { this.moveForce = value; }
+    }
+
     void ShipFire()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             randomIndex = Random.Range(0, projectiles.Length);
             weap = Instantiate(projectiles[randomIndex]);
@@ -83,6 +91,25 @@ public class PlayerShipMovement : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerProjectile") || collision.gameObject.CompareTag("ScreenBound"))
+        {
+            //Debug.Log("Safe");
+        }
+        //else if (collision.gameObject.CompareTag("EnemyProjectile"))
+        //{
+        //    Debug.Log("Enemy Projectile");
+        //}
+        else
+        {
+            currentHealth -= 25;
+            Destroy(collision.gameObject);
+            HealthBar.SetHealth(currentHealth);
+            //healthBar.SetHealth(currentHealth);
         }
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - ScreenBound
   - Obstacles
   - Enemy
+  - EnemyProjectile
+  - PlayerProjectile
+  - powerup_speed
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -44,4 +44,15 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyProjectile") || collision.gameObject.CompareTag("ScreenBound"))
+        {
+            //Debug.Log("Safe");
+        }
+        else
+        {
+            Destroy(gameObject);        }
+        }
 }

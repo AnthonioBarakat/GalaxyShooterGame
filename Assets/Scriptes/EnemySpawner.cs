@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
 
-            yield return new WaitForSeconds(Random.Range(2, 7));
+            yield return new WaitForSeconds(Random.Range(1, 4));
 
             randomIndex = Random.Range(0, Enemies.Length);
             randomSide = Random.Range(0, pos.Length);
